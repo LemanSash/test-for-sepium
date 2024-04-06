@@ -15,19 +15,16 @@
 </body>
 </html>
 <?php
+include "config.php";
+
 if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])){
 $name = $_POST['name'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-$db_host = "sql101.infinityfree.com"; 
-$db_user = "if0_36314588"; 
-$db_password = "sxaf3avmWMgHk";
-$db_base = 'if0_36314588_test'; 
 $db_table = "users";
 
 try {
-        $db = new PDO("mysql:host=$db_host;dbname=$db_base", $db_user, $db_password);
         $db->exec("set names utf8");
         $data = array( 'name' => $name, 'email' => $email, 'password' => $password ); 
         $query = $db->prepare("INSERT INTO $db_table (name, email, password) values (:name, :email, :password)");
