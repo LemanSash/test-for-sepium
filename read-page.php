@@ -50,28 +50,22 @@ $allUsers = $stm->fetchAll();
         <script type="text/javascript">
             $(document).ready(function(){
 
-            // Delete 
             $('.delete').click(function(){
                 var el = this;
         
-                // Delete id
                 var deleteid = this.id;
         
                 var confirmalert = confirm("Are you sure?");
                 if (confirmalert == true) {
-                    // AJAX Request
                     $.ajax({
                         url: 'delete-page.php',
                         type: 'POST',
                         data: { id:deleteid },
                         success: function(response){
 
-                            if(response == 1){
-                            // Remove row from HTML Table
-                            $(el).closest('tr').css('background','tomato');
-                            $(el).closest('tr').fadeOut(800,function(){
-                                $(this).remove();
-                            });
+                            if(response){
+                            $('table').html(response);
+                            window.location.reload();
                             }else{
                             alert('Invalid ID.');
                             }
