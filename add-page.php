@@ -6,6 +6,11 @@ if (!isset($_SESSION["name"])) {
     exit;
 }
 
+if (isset($_POST['logout'])){
+  session_destroy();
+  header("location: index.php");
+}
+
 include "config.php";
 
 if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])){
@@ -34,6 +39,7 @@ if ($result) {
 <head>
  <title>Добавить пользователя</title>
 </head>
+
 <body>
  <form method="POST" action="">
   <input name="name" type="text" placeholder="Имя"/>
@@ -41,8 +47,14 @@ if ($result) {
   <input name="password" type="text" placeholder="Пароль"/>
   <input type="submit" value="Отправить"/>
  </form>
+
  <form action="main-page.php">
     <button>Назад</button>
  </form>
+
+ <form method="POST">
+    <input type="submit" name="logout" value="Выйти">
+ </form>
+
 </body>
 </html>

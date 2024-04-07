@@ -6,6 +6,11 @@ if (!isset($_SESSION["name"])) {
     exit;
 }
 
+if (isset($_POST['logout'])){
+    session_destroy();
+    header("location: index.php");
+}
+
 include('config.php');
 
 $db->exec('SET NAMES UTF8');
@@ -36,6 +41,10 @@ $allUsers = $stm->fetchAll();
         
         <form action="main-page.php">
             <button>Назад</button>
+        </form>
+
+        <form method="POST">
+            <input type="submit" name="logout" value="Выйти">
         </form>
 
         <script type="text/javascript">
